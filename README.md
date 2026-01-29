@@ -15,11 +15,21 @@ A single-player web-based Texas Hold'em poker game with Game Theory Optimal (GTO
 
 ## How to Play
 
-1. Open `index.html` in a web browser
-2. Click "New Game" to start
-3. Use action buttons (Fold, Check, Call, Raise) to play
-4. Click "GT Advice" anytime to see optimal strategy recommendations
-5. Game continues until only one player remains
+**Option 1: Using HTTP Server (Recommended)**
+```bash
+npm install
+npm run serve
+# Open http://localhost:8080 in browser
+```
+
+**Option 2: Direct File**
+Open `index.html` in a browser that supports ES6 modules from file:// protocol (some browsers block this)
+
+**Playing the Game:**
+1. Click "New Game" to start
+2. Use action buttons (Fold, Check, Call, Raise) to play
+3. Click "GT Advice" anytime to see optimal strategy recommendations
+4. Game continues until only one player remains
 
 ## Game Rules
 
@@ -46,9 +56,17 @@ tests/        - Jest unit tests
 ```
 
 ### Running Tests
+
+**Unit Tests:**
 ```bash
 npm install
 npm test
+```
+
+**E2E Tests (Playwright):**
+```bash
+npm install
+npx playwright test
 ```
 
 ### GTO Algorithm
