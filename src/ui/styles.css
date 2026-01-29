@@ -1,0 +1,301 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #fff;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+#app {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#game-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+#poker-table {
+    background: #0a5f0a;
+    border-radius: 50%;
+    width: 800px;
+    height: 400px;
+    margin: 0 auto 30px;
+    position: relative;
+    border: 10px solid #8b4513;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+#community-cards {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 5px;
+}
+
+.card {
+    width: 60px;
+    height: 84px;
+    background: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+.card.red { color: #d00; }
+.card.black { color: #000; }
+.card.back {
+    background: linear-gradient(45deg, #1e3c72, #2a5298);
+    color: transparent;
+}
+
+#players {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.player {
+    position: absolute;
+    width: 140px;
+    padding: 10px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.player.active {
+    border: 2px solid #ffd700;
+}
+
+.player.dealer::after {
+    content: 'D';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #ffd700;
+    color: #000;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.player-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.player-chips {
+    font-size: 12px;
+    color: #ffd700;
+}
+
+.player-bet {
+    font-size: 11px;
+    color: #0f0;
+    margin-top: 3px;
+}
+
+.player-cards {
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.player-cards .card {
+    width: 40px;
+    height: 56px;
+    font-size: 14px;
+}
+
+#player-area {
+    background: rgba(0,0,0,0.4);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+#player-cards {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+#action-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.action-btn, .gt-btn, #new-game-btn, #next-hand-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.action-btn {
+    background: #4CAF50;
+    color: white;
+}
+
+.action-btn:hover:not(:disabled) {
+    background: #45a049;
+    transform: scale(1.05);
+}
+
+.action-btn:disabled {
+    background: #666;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.gt-btn {
+    background: #ff9800;
+    color: white;
+    font-weight: bold;
+}
+
+.gt-btn:hover {
+    background: #e68900;
+}
+
+#raise-amount {
+    width: 100px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #4CAF50;
+    border-radius: 5px;
+}
+
+#new-game-btn, #next-hand-btn {
+    background: #2196F3;
+    color: white;
+    margin: 20px auto;
+    display: block;
+}
+
+#log {
+    background: rgba(0,0,0,0.4);
+    border-radius: 5px;
+    padding: 15px;
+    max-width: 600px;
+    margin: 20px auto;
+    max-height: 150px;
+    overflow-y: auto;
+    font-size: 13px;
+}
+
+.log-entry {
+    margin-bottom: 5px;
+    padding: 3px 0;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal:not(.hidden) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: #fff;
+    color: #000;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #f00;
+}
+
+#gto-content {
+    margin-top: 20px;
+    line-height: 1.6;
+}
+
+.gto-stat {
+    margin: 10px 0;
+    padding: 8px;
+    background: #f0f0f0;
+    border-radius: 5px;
+}
+
+.gto-recommendation {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#pot-display {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,215,0,0.2);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+}
